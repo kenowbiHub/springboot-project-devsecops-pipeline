@@ -60,6 +60,7 @@ pipeline {
    stage('Stage VI: Build Image') {
       steps { 
         echo "Build Docker Image"
+        sh "docker rm --force smokerun"
         script {
                docker.withRegistry( '', registryCredential ) { 
                  myImage = docker.build registry
