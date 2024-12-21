@@ -12,10 +12,13 @@ import com.myapp.service.car.CarService;
 import com.myapp.service.driver.DriverService;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +43,8 @@ public class DriverController {
     private final DriverService driverService;
     private final CarService carService;
 
+    private static final Logger LOOGER = Logger.getLogger(DriverController.class.getName());
+
 
     @Autowired
     public DriverController(final DriverService driverService, final CarService carService) {
@@ -50,6 +55,7 @@ public class DriverController {
 
     @GetMapping("/{driverId}")
     public DriverDTO getDriver(@Valid @PathVariable long driverId) throws EntityNotFoundException {
+        LOOGER.log(Level.INFO, "Calling getDriver...");
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
 
