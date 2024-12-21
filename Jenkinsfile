@@ -80,6 +80,7 @@ pipeline {
       steps { 
         echo "Smoke Test the Image"
         sh "docker run -d --name smokerun -p 8080:8080 kingslifydockerhub/democicd"
+        sh "chmod 777 ./check.sh"
         sh "sleep 90; ./check.sh"
         sh "docker rm --force smokerun"
         }
