@@ -61,7 +61,6 @@ pipeline {
       steps { 
         echo "Build Docker Image"
         sh "docker ps -a"
-        sh "docker rm -force smokerun"
         script {
                docker.withRegistry( '', registryCredential ) { 
                  myImage = docker.build registry
@@ -81,6 +80,7 @@ pipeline {
    stage('Stage VIII: Smoke Test ') {
       steps { 
         echo "Smoke Test the Image"
+        sh "docker container rm -force smokerun"
         sh "docker run -d --name smokerun -p 8080:8080 kingslifydockerhub/democicd"
         sh "chmod 777 ./check.sh"
         sh "sleep 90; ./check.sh"
