@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', credentialsId: 'GitHubCred', url: 'https://github.com/kenowbiHub/springboot-project-devsecops-pipeline.git'
+        git branch: 'main', credentialsId: 'GithubCred', url: 'https://github.com/kenowbiHub/springboot-project-devsecops-pipeline.git'
       }
     }
   
