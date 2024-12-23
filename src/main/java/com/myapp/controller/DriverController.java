@@ -43,6 +43,8 @@ public class DriverController {
     private final DriverService driverService;
     private final CarService carService;
 
+    private static final Logger LOOGER = Logger.getLogger(DriverController.class.getName());
+
 
     @Autowired
     public DriverController(final DriverService driverService, final CarService carService) {
@@ -53,6 +55,7 @@ public class DriverController {
 
     @GetMapping("/{driverId}")
     public DriverDTO getDriver(@Valid @PathVariable long driverId) throws EntityNotFoundException {
+        LOOGER.log(Level.INFO, "Calling getDriver...");
         return DriverMapper.makeDriverDTO(driverService.find(driverId));
     }
 
